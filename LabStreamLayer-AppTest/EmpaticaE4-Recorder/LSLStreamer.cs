@@ -21,7 +21,7 @@ namespace EmpaticaE4_Recorder
 				lslOutlet = new liblsl.StreamOutlet(lslStreamInfo);
 			}
 		}
-		
+
 		public void PushSample(double sample)
 		{
 			double[] lslSample = { sample };
@@ -57,5 +57,22 @@ namespace EmpaticaE4_Recorder
 			double[] lslSample = { sample };
 			lslOutlet.push_sample(lslSample, liblsl.local_clock());
 		}
+		
+		// new >>
+		public void PushSamples(double[] sample)
+		{
+			lslOutlet.push_sample(sample);
+		}
+
+		public void PushSamples(double[] sample, double timestamp)
+		{
+			lslOutlet.push_sample(sample, timestamp);
+		}
+
+		public void PushSamplesLocalClock(double[] sample)
+		{
+			lslOutlet.push_sample(sample, liblsl.local_clock());
+		}
+		// new <<
 	}
 }

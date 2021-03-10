@@ -57,6 +57,10 @@ namespace EmpaticaE4_Recorder
 		private LSLStreamingBVP lslBVPOutlet;
 		private LSLStreamingGSR lslGSROutlet;
 		private LSLStreamingTemp lslTMPOutlet;
+		// new >>
+		private LSLStreamingIBI lslIBIOutlet;
+		private LSLStreamingTag lslTAGOutlet;
+		// new <<
 
 		/// <summary>
 		/// UI Interface Variables
@@ -315,7 +319,7 @@ namespace EmpaticaE4_Recorder
 				{
 					// Sometimes the Message comes with multiple lines -- Check and parse it effective
 					string[] lineParser = msg.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-
+					
 					foreach(string line in lineParser)
 					{
 						string[] parser = line.Split(' ');
@@ -356,10 +360,20 @@ namespace EmpaticaE4_Recorder
 								{
 									LSLSubscribe_GSR();
 								}
-								else if(parser[2] == "tmp")
+								else if (parser[2] == "tmp")
 								{
 									LSLSubscribe_TMP();
 								}
+								// new >>
+								else if (parser[2] == "ibi")
+								{
+									LSLSubscribe_IBI();
+								}
+								else if (parser[2] == "tag")
+								{
+									LSLSubscribe_TAG();
+								}
+								// new <<
 							}
 						}
 						else
@@ -388,6 +402,24 @@ namespace EmpaticaE4_Recorder
 								lslTMPOutlet.PushSample(tmpValue, timestamp);
 								PushMsgToUI(line);
 							}
+							// new >>
+							else if (parser[0] == "E4_Ibi" && lslIBIOutlet != null)
+							{
+								// Treat IBI Signal Here
+								double timestamp = Convert.ToDouble(parser[1]);
+								double ibiValue = Convert.ToDouble(parser[2]);
+								lslIBIOutlet.PushSample(ibiValue, timestamp);
+								PushMsgToUI(line);
+							}
+							else if (parser[0] == "E4_Tag" && lslTAGOutlet != null)
+							{
+								// Treat TAG Signal Here
+								double timestamp = Convert.ToDouble(parser[1]);
+								double tagValue = Convert.ToDouble(parser[2]);
+								lslTAGOutlet.PushSample(tagValue, timestamp);
+								PushMsgToUI(line);
+							}
+							// new <<
 						}
 					}
 				}
@@ -492,6 +524,14 @@ namespace EmpaticaE4_Recorder
 				string s = "device_subscribe ibi ON" + Environment.NewLine;
 				sendMsgQueue.Enqueue(s);
 			}
+
+			// new >>
+			else if (streamType == "TAG")
+			{
+				string s = "device_subscribe tag ON" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			// new <<
 		}
 
 		private void UnsubscribeStream(string streamType)
@@ -516,6 +556,14 @@ namespace EmpaticaE4_Recorder
 				string s = "device_subscribe ibi OFF" + Environment.NewLine;
 				sendMsgQueue.Enqueue(s);
 			}
+
+			// new >>
+			else if (streamType == "TAG")
+			{
+				string s = "device_subscribe tag OFF" + Environment.NewLine;
+				sendMsgQueue.Enqueue(s);
+			}
+			// new <<
 		}
 
 		// This is necessary to ease the initialization. Once the user connects to a device, automatically subscribe to all streams "ticked".
@@ -536,6 +584,18 @@ namespace EmpaticaE4_Recorder
 				SubscribeStream("TMP");
 				Thread.Sleep(100);
 			}
+			// new >>
+			if (IBIStreamBox.Dispatcher.Invoke(() => { return IBIStreamBox.IsChecked.Value; }))
+			{
+				SubscribeStream("IBI");
+				Thread.Sleep(100);
+			}
+			if (TagStreamBox.Dispatcher.Invoke(() => { return TagStreamBox.IsChecked.Value; }))
+			{
+				SubscribeStream("TAG");
+				Thread.Sleep(100);
+			}
+			// new <<
 		}
 
 		private void SubscribeBVP(object sender, RoutedEventArgs e)
@@ -592,6 +652,43 @@ namespace EmpaticaE4_Recorder
 			}
 		}
 
+		// new >>
+		private void SubscribeIBI(object sender, RoutedEventArgs e)
+		{
+			if (TempStreamBox.IsChecked.Value)
+			{
+				if (isConnected && empaticaConnected)
+				{
+					SubscribeStream("IBI");
+				}
+			}
+			else
+			{
+				if (isConnected && empaticaConnected)
+				{
+					UnsubscribeStream("IBI");
+				}
+			}
+		}
+
+		private void SubscribeTag(object sender, RoutedEventArgs e)
+		{
+			if (TempStreamBox.IsChecked.Value)
+			{
+				if (isConnected && empaticaConnected)
+				{
+					SubscribeStream("TAG");
+				}
+			}
+			else
+			{
+				if (isConnected && empaticaConnected)
+				{
+					UnsubscribeStream("TAG");
+				}
+			}
+		}
+		// new <<
 
 		// Lab Streaming Layer Functions
 		private void LSLSubscribe_BVP()
@@ -608,5 +705,17 @@ namespace EmpaticaE4_Recorder
 		{
 			lslTMPOutlet = new LSLStreamingTemp(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
 		}
+
+		// new >>
+		private void LSLSubscribe_IBI()
+		{
+			lslIBIOutlet = new LSLStreamingIBI(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
+		}
+
+		private void LSLSubscribe_TAG()
+		{
+			lslTAGOutlet = new LSLStreamingTag(playerIDTextBox.Dispatcher.Invoke(() => { return playerIDTextBox.Text; }));
+		}
+		// new <<
 	}
 }

@@ -100,6 +100,9 @@
     </ApplicationDefinition>
     <Compile Include="LSL.cs" />
     <Compile Include="LSLStreamer.cs" />
+    <Compile Include="LSLStreamingHR.cs" />
+    <Compile Include="LSLStreamingTag.cs" />
+    <Compile Include="LSLStreamingIBI.cs" />
     <Compile Include="LSLStreamingBVP.cs" />
     <Compile Include="LSLStreamingGSR.cs" />
     <Compile Include="LSLStreamingTemp.cs" />
