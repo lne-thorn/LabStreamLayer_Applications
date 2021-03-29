@@ -15,8 +15,8 @@ namespace EmpaticaE4_Recorder
 		/// </summary>
 		private const string guid = "2C711D79-4064-46B7-87DC-2F27F07E0E8B"; // Unique Process ID -- Pre-Generated
 
-		private const string lslStreamName = "Empatica Streamer (Tag)";
-		private const string lslStreamType = "Tag-Signals";
+		private const string lslStreamName = "E4-Tags";
+		private const string lslStreamType = "Tag";
 		private const double sampling_rate = 0.0; // Default Value
 		
 		private const int lslChannelCount = 1; // Number of Channels to Stream by Default

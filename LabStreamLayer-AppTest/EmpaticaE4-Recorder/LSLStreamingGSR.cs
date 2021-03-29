@@ -14,8 +14,8 @@ namespace EmpaticaE4_Recorder
 		/// </summary>
 		private const string guid = "0DBBFDBD-7A92-4300-9C47-9EE5B1D37B57"; // Unique Process ID -- Pre-Generated
 
-		private const string lslStreamName = "Empatica Streamer (GSR)";
-		private const string lslStreamType = "GSR-Signals";
+		private const string lslStreamName = "E4-EDA";
+		private const string lslStreamType = "EDA";
 		private const double sampling_rate = 4.0; // Default Value
 
 		private const int lslChannelCount = 1; // Number of Channels to Stream by Default

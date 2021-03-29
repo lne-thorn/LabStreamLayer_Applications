@@ -15,8 +15,8 @@ namespace EmpaticaE4_Recorder
 		/// </summary>
 		private const string guid = "2C711D79-4064-46B7-87DC-2F27F07E0E8F"; // Unique Process ID -- Pre-Generated
 
-		private const string lslStreamName = "Empatica Streamer (BVP)";
-		private const string lslStreamType = "BVP-Signals";
+		private const string lslStreamName = "E4-BVP";
+		private const string lslStreamType = "BVP";
 		private const double sampling_rate = 64.0; // Default Value
 		
 		private const int lslChannelCount = 1; // Number of Channels to Stream by Default

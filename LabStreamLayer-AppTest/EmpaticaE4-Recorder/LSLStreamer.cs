@@ -59,19 +59,37 @@ namespace EmpaticaE4_Recorder
 		}
 		
 		// new >>
-		public void PushSamples(double[] sample)
+		public void PushSample(double[] sample)
 		{
 			lslOutlet.push_sample(sample);
 		}
 
-		public void PushSamples(double[] sample, double timestamp)
+		public void PushSample(double[] sample, double timestamp)
 		{
 			lslOutlet.push_sample(sample, timestamp);
 		}
 
-		public void PushSamplesLocalClock(double[] sample)
+		public void PushSampleLocalClock(double[] sample)
 		{
 			lslOutlet.push_sample(sample, liblsl.local_clock());
+		}
+
+		public void PushSample(string sample)
+		{
+			string[] lslSample = { sample };
+			lslOutlet.push_sample(lslSample);
+		}
+
+		public void PushSample(string sample, double timestamp)
+		{
+			string[] lslSample = { sample };
+			lslOutlet.push_sample(lslSample, timestamp);
+		}
+
+		public void PushSampleLocalClock(string sample)
+		{
+			string[] lslSample = { sample };
+			lslOutlet.push_sample(lslSample, liblsl.local_clock());
 		}
 		// new <<
 	}

@@ -14,8 +14,8 @@ namespace EmpaticaE4_Recorder
 		/// </summary>
 		private const string guid = "A70ABAC0-2C0C-4572-BDEB-96886474BD60"; // Unique Process ID -- Pre-Generated
 
-		private const string lslStreamName = "Empatica Streamer (Temp)";
-		private const string lslStreamType = "Temperature-Signals";
+		private const string lslStreamName = "E4-Temperature";
+		private const string lslStreamType = "Temperature";
 		private const double sampling_rate = 4.0; // Default Value
 
 		private const int lslChannelCount = 1; // Number of Channels to Stream by Default

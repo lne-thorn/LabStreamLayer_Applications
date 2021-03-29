@@ -15,8 +15,8 @@ namespace EmpaticaE4_Recorder
 		/// </summary>
 		private const string guid = "2C711D79-4064-46B7-87DC-2F27F07E0E8C"; // Unique Process ID -- Pre-Generated
 
-		private const string lslStreamName = "Empatica Streamer (HR)";
-		private const string lslStreamType = "HR-Signals";
+		private const string lslStreamName = "E4-HeartRate";
+		private const string lslStreamType = "Heart Rate";
 		private const double sampling_rate = 0.0; // Default Value
 		
 		private const int lslChannelCount = 1; // Number of Channels to Stream by Default
