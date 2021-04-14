@@ -383,7 +383,7 @@ namespace EmpaticaE4_Recorder
 								// Treat BVP Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double bvpValue = Convert.ToDouble(parser[2]);
-								lslBVPOutlet.PushSample(bvpValue, timestamp);
+								lslBVPOutlet.PushSample(bvpValue/*, timestamp*/);
 								PushMsgToUI(line);
 							}
 							else if(parser[0] == "E4_Gsr" && lslGSROutlet != null)
@@ -391,7 +391,7 @@ namespace EmpaticaE4_Recorder
 								// Treat GSR Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double gsrValue = Convert.ToDouble(parser[2]);
-								lslGSROutlet.PushSample(gsrValue, timestamp);
+								lslGSROutlet.PushSample(gsrValue/*, timestamp*/);
 								PushMsgToUI(line);
 							}
 							else if(parser[0] == "E4_Temperature" && lslTMPOutlet != null)
@@ -399,7 +399,7 @@ namespace EmpaticaE4_Recorder
 								// Treat TMP Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double tmpValue = Convert.ToDouble(parser[2]);
-								lslTMPOutlet.PushSample(tmpValue, timestamp);
+								lslTMPOutlet.PushSample(tmpValue/*, timestamp*/);
 								PushMsgToUI(line);
 							}
 							// new >>
@@ -408,7 +408,7 @@ namespace EmpaticaE4_Recorder
 								// Treat IBI Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double ibiValue = Convert.ToDouble(parser[2]);
-								lslIBIOutlet.PushSample(ibiValue, timestamp);
+								lslIBIOutlet.PushSample(ibiValue/*, timestamp*/);
 								PushMsgToUI(line);
 							}
 							else if (parser[0] == "E4_Tag" && lslTAGOutlet != null)
@@ -416,7 +416,7 @@ namespace EmpaticaE4_Recorder
 								// Treat TAG Signal Here
 								double timestamp = Convert.ToDouble(parser[1]);
 								double tagValue = Convert.ToDouble(parser[2]);
-								lslTAGOutlet.PushSample(tagValue, timestamp);
+								lslTAGOutlet.PushSample(tagValue/*, timestamp*/);
 								PushMsgToUI(line);
 							}
 							// new <<
